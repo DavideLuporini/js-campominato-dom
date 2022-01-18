@@ -11,27 +11,12 @@
     cursor: pointer;
 }
 
-.celleasy {
-    height: calc(100% /10);
-    width: calc(100% /10);
+.cell {
     display: inline-flex;
-}
-
-.cellnormal {
-    height: calc(100% /9);
-    width: calc(100% /9);
-    display: inline-flex;
-}
-
-.cellhard {
-    height: calc(100% /7);
-    width: calc(100% /7);
-    display: inline-flex;
-}
-
-.bg-lightblue {
-    background-color: #65DB94;
-    color: #2A5C3E;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
 }
 
 .bg-green {
@@ -60,4 +45,25 @@
     cursor: pointer;
     border: none;
     user-select: none;
+}
+
+.safe {
+    background-color: #65DB94;
+    color: #2A5C3E;
+}
+
+.bomb {
+    background-color: #dd0e0e;
+    color: #daa199;
+}
+
+.message {
+    cursor: pointer;
+    user-select: none;
+    color: white;
+    margin-top: 10px;
+}
+
+.align-sup {
+    vertical-align: sub;
 }

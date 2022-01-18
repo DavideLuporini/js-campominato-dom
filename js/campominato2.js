@@ -1,45 +1,24 @@
-console.log('js ok')
-
-// Consegna
-// L'utente indica TRAMITE DOM un livello di difficoltà in base al quale viene generata una griglia di 
-// gioco quadrata, in cui ogni cella contiene un numero tra quelli compresi in un range:
-// con difficoltà 1 => tra 1 e 100
-// con difficoltà 2 => tra 1 e 81
-// con difficoltà 3 => tra 1 e 49
-// Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
-// Consigli del giorno: :
-// Scriviamo prima cosa vogliamo fare passo passo in italiano, dividiamo il lavoro in micro problemi.
-// Ad esempio:
-// Di cosa ho bisogno per generare i numeri?
-// Proviamo sempre prima con dei console.log() per capire se stiamo ricevendo i dati giusti.
-// Le validazioni e i controlli possiamo farli anche in un secondo momento.
-
-
-// VARIABILI
-const selectDifficultyEasy = document.getElementById('easy');
-const selectDifficultyNormal = document.getElementById('normal');
-const selectDifficultyHard = document.getElementById('hard');
-const resetGame = document.getElementById('reset');
-const grid = document.getElementById('grid')
-let attemps = 0;
-const TOTAL_BOMBS = 16;
-totalBombs = 16;
-// dichiaro numeri per difficoltà
-const numberEasy = getRandomNumber(1, 100);
-const numberNormal = getRandomNumber(1, 81);
-const numberHard = getRandomNumber(1, 49);
-
 const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 
 // RECUPERO LA GRIGLIA
+const button = document.getElementById("start");
+
+
+
+
 const selectDifficultyEasy = document.getElementById('easy');
 const selectDifficultyNormal = document.getElementById('normal');
 const selectDifficultyHard = document.getElementById('hard');
+const resetGame = document.getElementById('reset');
+const grid = document.getElementById('grid');
+const banner = document.getElementById('banner')
+console.log(selectDifficultyEasy)
 
-function start() {
+
+function start(mode) {
     // Cambio il tasto del bottone e lo chiamo ricomincia
-    button.innerText = 'RESTART'
+    resetGame.innerText = 'RESTART'
 
     grid.innerHTML = '';
     grid.style.display = 'flex';
@@ -50,11 +29,11 @@ function start() {
 
     let columns;
 
-    switch (select.value) {
-        case "2":
+    switch (mode) {
+        case "normal":
             columns = 9;
             break;
-        case "3":
+        case "hard":
             columns = 7;
             break;
         default:
@@ -65,7 +44,7 @@ function start() {
     const totalCells = columns * columns;
 
     const maxAttempts = totalCells - totalBombs;
-
+    let bombs = [];
 
     // GENERO UNA BOMBA
     const generateBombs = (totalBombs, totalNumber) => {
@@ -83,7 +62,7 @@ function start() {
     const generateGrid = (cellsNumber, cellsPerRow, bombs) => {
         for (let i = 1; i <= cellsNumber; i++) {
             const cell = createCell(i, cellsPerRow);
-            cell.addEventListener('click', (event) => onCellClick(event.target, bombs, i));
+            cell.addEventListener('click', onCellClick);
             grid.appendChild(cell);
         }
     }
@@ -91,6 +70,7 @@ function start() {
     // CREO LA CELLA
     function createCell(cellNumber, cellsPerRow) {
         const cell = document.createElement("div");
+        cell.id = cellNumber;
         cell.className = "cell";
         cell.innerText = cellNumber;
         const wh = `calc(100% / ${cellsPerRow})`;
@@ -100,15 +80,17 @@ function start() {
     }
 
     // Gestisco l'evento al click
-    function onCellClick(clickedCell, bombs, number) {
-        clickedCell.removeEventListener("click", onCellClick);
-        console.log('ciao');
+    function onCellClick(event) {
+        const cell = event.target;
+        cell.removeEventListener("click", onCellClick);
 
         // Controllo se è una bomba
+        let number = parseInt(cell.id);
+
         if (bombs.includes(number)) {
             gameOver(bombs, attempts, true);
         } else {
-            clickedCell.classList.add("safe")
+            cell.classList.add("safe")
             attempts++;
             if (attempts === maxAttempts) {
                 gameOver(bombs, attempts, false);
@@ -126,12 +108,13 @@ function start() {
 
         showBoms(bombs);
 
-        const message = document.createElement('h2');
-        message.className = 'message';
+        const message = document.createElement('h5');
+        message.className = 'message m-2';
 
-        const messageText = hasLost ? `HAI PERSO, RIPROVA (questo è il tuo punteggio ${attempts})` : `HAI VINTO!!!!!!!!`
-        message.innerText = messageText;
-        grid.appendChild(message);
+        const messageText = hasLost ? `<div class="h1">HAI PERSO, RIPROVA</div> <br> <div>Il tuo punteggio è: <span class="h1 m-3 align-sup">${attempts}</span></div>` : `HAI VINTO!!!!!!!!`
+        message.innerHTML = messageText;
+        banner.appendChild(message);
+        banner.appendChild(message);
 
 
 
@@ -151,17 +134,17 @@ function start() {
 
     // Esecuzione
 
-    const bombs = generateBombs(totalBombs, totalCells)
+    bombs = generateBombs(totalBombs, totalCells)
     console.log(bombs);
 
     generateGrid(totalCells, columns, bombs);
 }
 
-button.addEventListener("click", () => start());
+
 
 // evento sul click in easy
 selectDifficultyEasy.addEventListener('click', function() {
-        start()
+        start('easy')
 
         selectDifficultyEasy.classList.add('disabled');
         selectDifficultyNormal.classList.add('d-none');
@@ -170,14 +153,14 @@ selectDifficultyEasy.addEventListener('click', function() {
     })
     // evento sul click in medium
 selectDifficultyNormal.addEventListener('click', function() {
-        start()
+        start('normal')
         selectDifficultyEasy.classList.add('d-none');
         selectDifficultyNormal.classList.add('disable');
         selectDifficultyHard.classList.add('d-none');
     })
     // evento sul click in hard
 selectDifficultyHard.addEventListener('click', function() {
-        start()
+        start('hard');
 
         selectDifficultyEasy.classList.add('d-none');
         selectDifficultyNormal.classList.add('d-none');
@@ -187,6 +170,8 @@ selectDifficultyHard.addEventListener('click', function() {
     // evento bottono reset
 resetGame.addEventListener('click', function() {
     grid.innerHTML = "";
+    banner.innerHTML = "";
+    resetGame.innerHTML = "Reset";
     selectDifficultyEasy.classList.remove('disabled');
     selectDifficultyNormal.classList.remove('disabled');
     selectDifficultyHard.classList.remove('disabled');
