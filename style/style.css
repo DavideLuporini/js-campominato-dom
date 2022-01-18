@@ -35,10 +35,18 @@
     color: #65DB94;
 }
 
-.classeb div:hover {
+div .bomb:hover {
+    background-color: #dd0e0e;
+    color: #ebf70d;
+    border: 3px solid darkred;
+    transform: scale(1.1);
+}
+
+.cell:hover {
     background-color: #65DB94;
     color: #2A5C3E;
     border: 3px solid #465C4F;
+    transform: scale(1.1);
 }
 
 .cursor {
@@ -52,9 +60,10 @@
     color: #2A5C3E;
 }
 
-.bomb {
+div .bomb {
     background-color: #dd0e0e;
-    color: #daa199;
+    color: #ebf70d;
+    border: 1px solid darkred;
 }
 
 .message {
