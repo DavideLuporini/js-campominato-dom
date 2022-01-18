@@ -1,0 +1,63 @@
+.classeb {
+    margin-top: 50px;
+    height: 550px;
+    width: 550px;
+    padding: 0;
+    border: black 2px solid;
+}
+
+.classeb div {
+    border: 2px solid #65DB94;
+    cursor: pointer;
+}
+
+.celleasy {
+    height: calc(100% /10);
+    width: calc(100% /10);
+    display: inline-flex;
+}
+
+.cellnormal {
+    height: calc(100% /9);
+    width: calc(100% /9);
+    display: inline-flex;
+}
+
+.cellhard {
+    height: calc(100% /7);
+    width: calc(100% /7);
+    display: inline-flex;
+}
+
+.bg-lightblue {
+    background-color: #65DB94;
+    color: #2A5C3E;
+}
+
+.bg-green {
+    background-color: #465C4F;
+}
+
+.bg-darkgreen {
+    background-color: #2A5C3E;
+}
+
+.bgc-grid {
+    background-color: #239452;
+}
+
+.textlight-green {
+    color: #65DB94;
+}
+
+.classeb div:hover {
+    background-color: #65DB94;
+    color: #2A5C3E;
+    border: 3px solid #465C4F;
+}
+
+.cursor {
+    cursor: pointer;
+    border: none;
+    user-select: none;
+}
