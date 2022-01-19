@@ -37,7 +37,7 @@
 
 div .bomb:hover {
     background-color: #dd0e0e;
-    color: #ebf70d;
+    color: #000000;
     border: 3px solid darkred;
     transform: scale(1.1);
 }
@@ -62,7 +62,7 @@ div .bomb:hover {
 
 div .bomb {
     background-color: #dd0e0e;
-    color: #ebf70d;
+    color: #000000;
     border: 1px solid darkred;
 }
 
@@ -75,4 +75,16 @@ div .bomb {
 
 .align-sup {
     vertical-align: sub;
+}
+
+.remove-background {
+    background-image: url(../img/kisspng-time-bomb-cartoon-5ae737610e4c95.3177587015251024330586-removebg-preview.png);
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div .fa-bomb:hover {
+    transform: scale(1.5);
 }

@@ -127,6 +127,7 @@ function start(mode) {
             const cellNumber = parseInt(cell.innerText);
             if (bombs.includes(cellNumber)) {
                 cell.classList.add('bomb');
+                cell.innerHTML = '<i class="fas fa-bomb"></i>';
             }
         }
     }
@@ -145,7 +146,7 @@ function start(mode) {
 // evento sul click in easy
 selectDifficultyEasy.addEventListener('click', function() {
         start('easy')
-
+        grid.classList.remove('remove-background')
         selectDifficultyEasy.classList.add('disabled');
         selectDifficultyNormal.classList.add('d-none');
         selectDifficultyHard.classList.add('d-none');
@@ -154,6 +155,7 @@ selectDifficultyEasy.addEventListener('click', function() {
     // evento sul click in medium
 selectDifficultyNormal.addEventListener('click', function() {
         start('normal')
+        grid.classList.remove('remove-background')
         selectDifficultyEasy.classList.add('d-none');
         selectDifficultyNormal.classList.add('disable');
         selectDifficultyHard.classList.add('d-none');
@@ -161,7 +163,7 @@ selectDifficultyNormal.addEventListener('click', function() {
     // evento sul click in hard
 selectDifficultyHard.addEventListener('click', function() {
         start('hard');
-
+        grid.classList.remove('remove-background')
         selectDifficultyEasy.classList.add('d-none');
         selectDifficultyNormal.classList.add('d-none');
         selectDifficultyHard.classList.add('disable');
@@ -172,6 +174,7 @@ resetGame.addEventListener('click', function() {
     grid.innerHTML = "";
     banner.innerHTML = "";
     resetGame.innerHTML = "Reset";
+    grid.classList.add('remove-background')
     selectDifficultyEasy.classList.remove('disabled');
     selectDifficultyNormal.classList.remove('disabled');
     selectDifficultyHard.classList.remove('disabled');
