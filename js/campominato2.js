@@ -13,6 +13,7 @@ const selectDifficultyHard = document.getElementById('hard');
 const resetGame = document.getElementById('reset');
 const grid = document.getElementById('grid');
 const banner = document.getElementById('banner')
+const title = document.getElementById('hide-text')
 console.log(selectDifficultyEasy)
 
 
@@ -128,6 +129,7 @@ function start(mode) {
             if (bombs.includes(cellNumber)) {
                 cell.classList.add('bomb');
                 cell.innerHTML = '<i class="fas fa-bomb"></i>';
+                title.classList.add('d-none')
             }
         }
     }
@@ -150,7 +152,7 @@ selectDifficultyEasy.addEventListener('click', function() {
         selectDifficultyEasy.classList.add('disabled');
         selectDifficultyNormal.classList.add('d-none');
         selectDifficultyHard.classList.add('d-none');
-
+        title.innerHTML = 'Hai scelto la modalità easy!<br> Se vuoi cambiare modalità clicca su reset';
     })
     // evento sul click in medium
 selectDifficultyNormal.addEventListener('click', function() {
@@ -159,6 +161,7 @@ selectDifficultyNormal.addEventListener('click', function() {
         selectDifficultyEasy.classList.add('d-none');
         selectDifficultyNormal.classList.add('disable');
         selectDifficultyHard.classList.add('d-none');
+        title.innerHTML = 'Hai scelto la modalità normal!<br> Se vuoi cambiare modalità clicca su reset';
     })
     // evento sul click in hard
 selectDifficultyHard.addEventListener('click', function() {
@@ -167,6 +170,7 @@ selectDifficultyHard.addEventListener('click', function() {
         selectDifficultyEasy.classList.add('d-none');
         selectDifficultyNormal.classList.add('d-none');
         selectDifficultyHard.classList.add('disable');
+        title.innerHTML = 'Hai scelto la modalità hard!<br> Se vuoi cambiare modalità clicca su reset';
 
     })
     // evento bottono reset
@@ -181,5 +185,6 @@ resetGame.addEventListener('click', function() {
     selectDifficultyEasy.classList.remove('d-none');
     selectDifficultyNormal.classList.remove('d-none');
     selectDifficultyHard.classList.remove('d-none');
-
+    title.classList.remove('d-none');
+    title.innerHTML = 'Clicca sulla difficoltà desiderata';
 })
