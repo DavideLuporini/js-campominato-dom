@@ -51,6 +51,7 @@ function start(mode) {
     const generateBombs = (totalBombs, totalNumber) => {
         const bombs = [];
         while (bombs.length < totalBombs) { // il numero di bombe è inferiore a 16
+            console.log(bombs)
             const randNumber = getRandomNumber(1, totalNumber);
             if (!bombs.includes(randNumber)) { // Controllo se c'è nell'array di bombe
                 bombs.push(randNumber);
@@ -93,10 +94,21 @@ function start(mode) {
         } else {
             cell.classList.add("safe")
             attempts++;
-            if (attempts === maxAttempts) {
-                gameOver(bombs, attempts, false);
+            if (bombs.includes(cell.id - 10)) {
+                cell.innerHTML = '<i class="fas fa-flag"></i>';
+            } else if (bombs.includes(cell.id + 10)) {
+                cell.innerHTML = '<i class="fas fa-flag"></i>';
+
+            } else if (bombs.includes(cell.id + 1)) {
+                cell.innerHTML = '<i class="fas fa-flag"></i>';
+            } else if (bombs.includes(cell.id - 1)) {
+                cell.innerHTML = '<i class="fas fa-flag"></i>';
             }
         }
+        if (attempts === maxAttempts) {
+            gameOver(bombs, attempts, false);
+        }
+
     }
 
     // FINE PARTITA
@@ -188,3 +200,42 @@ resetGame.addEventListener('click', function() {
     title.classList.remove('d-none');
     title.innerHTML = 'Clicca sulla difficoltà desiderata';
 })
+
+
+
+
+
+
+
+// CHIEDERE PERCHE' NON FUNZIONA
+
+// if (cell.id.includes(columns * 1, columns * 2, columns * 3, columns * 4, columns * 5, columns * 6, columns * 7, columns * 8, columns * 9, columns * 10)) {
+//     if (bombs.includes(cell.id - 10)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     } else if (bombs.includes(cell.id + 10)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+
+//     } else if (bombs.includes(cell.id - 1)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     }
+// } else if (cell.id.includes(1, 11, 21, 31, 41, 51, 61, 71, 81, 91)) {
+//     if (bombs.includes(cell.id - 10)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     } else if (bombs.includes(cell.id + 10)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+
+//     } else if (bombs.includes(cell.id - 1)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     }
+
+// } else {
+//     if (bombs.includes(cell.id - 10)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     } else if (bombs.includes(cell.id + 10)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     } else if (bombs.includes(cell.id + 1)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     } else if (bombs.includes(cell.id - 1)) {
+//         cell.innerHTML = '<i class="fas fa-flag"></i>';
+//     }
+// }
